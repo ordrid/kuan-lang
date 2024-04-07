@@ -21,13 +21,13 @@ public static class Program
         }
     }
 
-    static void RunFile(string path)
+    private static void RunFile(string path)
     {
         byte[] bytes = File.ReadAllBytes(path);
         Run(Encoding.UTF8.GetString(bytes));
     }
 
-    static void Run(string source)
+    private static void Run(string source)
     {
         var scanner = new Scanner { Source = source };
         var tokens = scanner.ScanTokens();
@@ -38,7 +38,7 @@ public static class Program
         }
     }
 
-    static void RunPrompt()
+    private static void RunPrompt()
     {
         var welcomeMessage = """
 
