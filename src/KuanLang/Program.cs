@@ -4,6 +4,8 @@ namespace KuanLang;
 
 public static class Program
 {
+    private static bool s_hadError = false;
+
     public static void Main(string[] args)
     {
         if (args.Length > 1)
@@ -25,6 +27,11 @@ public static class Program
     {
         byte[] bytes = File.ReadAllBytes(path);
         Run(Encoding.UTF8.GetString(bytes));
+
+        if (s_hadError)
+        {
+            Environment.Exit(65);
+        }
     }
 
     private static void Run(string source)
@@ -66,6 +73,20 @@ public static class Program
             }
 
             Run(line);
+
+            s_hadError = false;
         }
+    }
+
+    private static void Error(int line, String message)
+    {
+        Report(line, string.Empty, message);
+    }
+
+    private static void Report(int line, string where, string message)
+    {
+        Console.Error.WriteLine($"[line {line}] Error {where}: {message}");
+
+        s_hadError = true;
     }
 }
