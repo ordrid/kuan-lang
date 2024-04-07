@@ -1,6 +1,6 @@
 namespace KuanLang;
 
-sealed record Scanner
+internal sealed record Scanner
 {
     public required string Source { get; init; }
 

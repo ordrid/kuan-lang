@@ -2,24 +2,24 @@
 
 namespace KuanLang;
 
-public static class Program
+internal static class Program
 {
     private static bool s_hadError = false;
 
-    public static void Main(string[] args)
+    internal static void Main(string[] args)
     {
-        if (args.Length > 1)
+        switch (args.Length)
         {
-            Console.WriteLine("Usage: kuan [script]");
-            Environment.Exit(64);
-        }
-        else if (args.Length == 1)
-        {
-            RunFile(args[0]);
-        }
-        else
-        {
-            RunPrompt();
+            case > 1:
+                Console.WriteLine("Usage: kuan [script]");
+                Environment.Exit(64);
+                break;
+            case 1:
+                RunFile(args[0]);
+                break;
+            default:
+                RunPrompt();
+                break;
         }
     }
 
